@@ -62,7 +62,7 @@ jobs:
       - name: Checkout code
         run: echo "Checkout code"
       - name: Build container image     
-        run: echo "Run docker build""
+        run: echo "Run docker build"
       - name: Push image to Azure Container Registry
         run: echo "Push image to ACR"
       - name: Deploy (AKS-Dev)
