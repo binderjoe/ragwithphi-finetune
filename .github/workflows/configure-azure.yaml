@@ -75,7 +75,7 @@ jobs:
       - name: Download datasets
         run: echo "Run batch evaluation" 
       - name: Azure Content Safety benchmarks
-        run: "Run safety benchmarks"
+        run: echo "Baseline safety benchmarks"
       - name: Groundedness and accuracy benchmarks
-        run: "Run groundedness and accuracy benchmarks"
+        run: echo "Groundedness and accuracy evals"
 
