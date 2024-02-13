@@ -28,7 +28,7 @@ concurrency:
 # The `jobs` key groups together all the jobs that run in the workflow file.
 jobs:
   # This line defines a job with the ID `check-links` that is stored within the `jobs` key.
-  check-subscription-status:
+  check-azure-subscription-status:
     # The `runs-on` key in this example configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. 
     # 
     # In this example, the job will run on a self-hosted runner if the repository is named `docs-internal` and is within the `github` organization. If the repository doesn't match this path, then it will run on an `ubuntu-latest` runner hosted by GitHub. For more information on these options, see "[AUTOTITLE](/actions/using-jobs/choosing-the-runner-for-a-job)."
@@ -37,10 +37,9 @@ jobs:
     steps:
       # The `uses` key tells the job to retrieve the action named `actions/checkout`. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will use the repository's code or you are using an action defined in the repository.
       - name: Checkout
-        uses: actions/checkout@v4
-  provision:
+        run: echo "Checkout code"
+  provision-resources-if-needed:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout infrastructure as code
         run: echo "Checkout code"
@@ -50,3 +49,33 @@ jobs:
         run: echo "Checkout code"
       - name: Configure Azure Monitor      
         run: echo "Provision infrastructure"
+  deploy-model:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        run: echo "Checkout code"
+      - name: Deploy Microsoft-Phi-2      
+        run: echo "Deploying managed online endpoint"
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        run: echo "Checkout code"
+      - name: Build container image     
+        run: echo "Run docker build""
+      - name: Push image to Azure Container Registry
+        run: echo "Push image to ACR"
+      - name: Deploy (AKS-Dev)
+        run: echo "Deploy to AKS"
+  batch-evaluation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tests
+        run: echo "Checkout code"
+      - name: Download datasets
+        run: echo "Run batch evaluation" 
+      - name: Azure Content Safety benchmarks
+        run: "Run safety benchmarks"
+      - name: Groundedness and accuracy benchmarks
+        run: "Run groundedness and accuracy benchmarks"
+
