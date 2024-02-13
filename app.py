@@ -26,7 +26,7 @@ if st.button("Generate Output"):
         token_ids = tokenizer.encode(prompt, add_special_tokens=False, return_tensors="pt")
         output_ids = model.generate(
             token_ids.to(model.device),
-            max_new_tokens=512,
+            max_new_tokens=1024,
             do_sample=True,
             temperature=0.3
         )
