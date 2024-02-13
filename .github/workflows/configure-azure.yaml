@@ -1,5 +1,5 @@
 # This defines the name of the workflow as it will appear in the "Actions" tab of the GitHub repository.
-name: 'Link Checker: All English'
+name: 'Provision and deploy Azure'
 
 # The `on` key lets you define the events that trigger when the workflow is run. You can define multiple events here. For more information, see "[AUTOTITLE](/actions/using-workflows/triggering-a-workflow#using-events-to-trigger-workflows)."
 on:
@@ -28,7 +28,7 @@ concurrency:
 # The `jobs` key groups together all the jobs that run in the workflow file.
 jobs:
   # This line defines a job with the ID `check-links` that is stored within the `jobs` key.
-  check-links:
+  check-subscription-status:
     # The `runs-on` key in this example configures the job to run on a GitHub-hosted runner or a self-hosted runner, depending on the repository running the workflow. 
     # 
     # In this example, the job will run on a self-hosted runner if the repository is named `docs-internal` and is within the `github` organization. If the repository doesn't match this path, then it will run on an `ubuntu-latest` runner hosted by GitHub. For more information on these options, see "[AUTOTITLE](/actions/using-jobs/choosing-the-runner-for-a-job)."
@@ -38,3 +38,15 @@ jobs:
       # The `uses` key tells the job to retrieve the action named `actions/checkout`. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will use the repository's code or you are using an action defined in the repository.
       - name: Checkout
         uses: actions/checkout@v4
+  provision:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout infrastructure as code
+        run: echo "Checkout code"
+      - name: Create Azure AI Project        
+        run: echo "Provision infrastructure"
+      - name: Provision Azure Kubernetes Cluster (AKS)
+        run: echo "Checkout code"
+      - name: Configure Azure Monitor      
+        run: echo "Provision infrastructure"
